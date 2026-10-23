@@ -5,7 +5,7 @@
 >
 > Altri progetti di elettronica, Arduino, ESP32, Home Assistant e stampa 3D su **[www.emgi.it](https://www.emgi.it)**
 
-![Contatore alla rovescia Arduino con LCD 16×4, relè e buzzer](immagini/cover-2026-contatore-alla-rovescia-arduino-con-lcd-16x4-rele-e-buzzer.png)
+![Contatore alla rovescia Arduino con LCD 16×4, relè e buzzer](immagini/copertina-3d.jpg)
 
 Questo progetto mostra come realizzare un **contatore alla rovescia da 30 minuti con Arduino**, completo di **display LCD 16×4 I2C**, **relè di uscita**, **LED di stato** e **buzzer passivo con melodia finale morbida**.
 
