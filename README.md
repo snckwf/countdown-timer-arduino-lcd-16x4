@@ -1,85 +1,84 @@
-# Contatore alla rovescia Arduino con LCD 16×4, relè e buzzer
+# Arduino countdown timer with 16×4 LCD, relay and buzzer
 
-> 📖 **Articolo completo con schema, foto e spiegazioni passo passo:**  
-> **[Contatore alla rovescia Arduino con LCD 16×4, relè e buzzer – www.emgi.it](https://www.emgi.it/2026/04/03/contatore-alla-rovescia-arduino-con-lcd-16x4-rele-e-buzzer/)**
+> 📖 **Full article with wiring diagram, photos and step-by-step explanations (in Italian):**  
+> **[Arduino countdown timer with 16×4 LCD, relay and buzzer – www.emgi.it](https://www.emgi.it/2026/04/03/contatore-alla-rovescia-arduino-con-lcd-16x4-rele-e-buzzer/)**
 >
-> Altri progetti di elettronica, Arduino, ESP32, Home Assistant e stampa 3D su **[www.emgi.it](https://www.emgi.it)**
+> More electronics, Arduino, ESP32, Home Assistant and 3D printing projects at **[www.emgi.it](https://www.emgi.it)**
 
-![Contatore alla rovescia Arduino con LCD 16×4, relè e buzzer](immagini/copertina-3d.jpg)
+![Arduino countdown timer with 16×4 LCD, relay and buzzer](images/cover-3d.jpg)
 
-Questo progetto mostra come realizzare un **contatore alla rovescia da 30 minuti con Arduino**, completo di **display LCD 16×4 I2C**, **relè di uscita**, **LED di stato** e **buzzer passivo con melodia finale morbida**.
+This project shows how to build a **30-minute countdown timer with Arduino**, with a **16×4 I2C LCD**, an **output relay**, a **status LED** and a **passive buzzer that plays a soft final melody**.
 
-È pensato per utilizzo pratico su banco di lavoro (es. saldatore), ma adattabile facilmente ad altri contesti.
+It is designed for practical use on a workbench (e.g. to switch off a soldering iron), but it is easy to adapt to other uses.
 
-## Caratteristiche principali
+## Main features
 
-- Countdown automatico da **30 minuti**
-- Pulsante **START / ReStart**
-- Pulsante **STOP immediato**
-- **Relè attivo** durante il conto
-- **LED fisso + lampeggio accelerato finale**
-- **Buzzer passivo soft (no distorsione)**
-- Display **LCD 16×4 con messaggi dinamici**
-- Interfaccia completamente in italiano
-- Nessuno sfarfallio del display (refresh ottimizzato)
+- Automatic **30-minute** countdown
+- **START / Restart** button
+- **Immediate STOP** button
+- **Relay on** while counting down
+- **Steady LED + accelerating blink** at the end
+- **Soft passive buzzer** (no distortion), melody 30 seconds before the end
+- **16×4 LCD with dynamic messages**
+- No display flicker (optimised refresh)
 
-## Componenti necessari
+## Parts list
 
-- Arduino UNO o Nano
-- Display LCD 16×4 con interfaccia I2C
-- 2 pulsanti
+- Arduino UNO or Nano
+- 16×4 LCD with I2C interface
+- 2 push buttons
 - 1 LED
-- Resistenza 220Ω
-- Buzzer passivo
-- Modulo relè 5V
-- Alimentazione 5V stabile
+- 220 Ω resistor
+- Passive buzzer
+- 5 V relay module
+- Stable 5 V power supply
 
-## Collegamenti elettrici
+## Wiring
 
-Scheda: **Arduino UNO o Nano**. Pin verificati sullo sketch (`startBtn = 8`, `zeroBtn = 9`, `relayPin = 10`, `buzzer = 11`, `ledPin = 12`).
+Board: **Arduino UNO or Nano**. Pins checked against the sketch (`startBtn = 8`, `zeroBtn = 9`, `relayPin = 10`, `buzzer = 11`, `ledPin = 12`).
 
-| Componente | Pin componente | Arduino |
+| Component | Component pin | Arduino |
 |---|---|---|
-| LCD 16×4 I2C (indirizzo `0x27`) | VCC | 5V |
+| 16×4 I2C LCD (address `0x27`) | VCC | 5V |
 | | GND | GND |
 | | SDA | A4 |
 | | SCL | A5 |
-| Pulsante START | un capo | D8 |
-| | altro capo | GND |
-| Pulsante STOP | un capo | D9 |
-| | altro capo | GND |
-| Modulo relè 5 V | IN | D10 |
+| START button | one leg | D8 |
+| | other leg | GND |
+| STOP button | one leg | D9 |
+| | other leg | GND |
+| 5 V relay module | IN | D10 |
 | | VCC | 5V |
 | | GND | GND |
-| Buzzer **passivo** | + | D11 |
+| **Passive** buzzer | + | D11 |
 | | − | GND |
-| LED di stato | anodo (gamba lunga) | D12 tramite resistenza **220 Ω** |
-| | catodo | GND |
+| Status LED | anode (long leg) | D12 through a **220 Ω** resistor |
+| | cathode | GND |
 
-- I pulsanti non hanno bisogno di resistenze: lo sketch usa il pull-up interno (`INPUT_PULLUP`), quindi premuto = collegato a GND.
-- Se il tuo LCD ha indirizzo `0x3F` invece di `0x27`, cambialo nella riga `LiquidCrystal_I2C lcd(0x27, 16, 4);`.
-- Il carico comandato dal relè (es. saldatore a 230 V) va sui contatti **COM/NO** del modulo: lavora con la rete scollegata e isola bene i contatti.
-- Alimentazione: 5 V stabili; con il relè attivo il consumo sale, usa un alimentatore da almeno 1 A.
+- The buttons need no resistors: the sketch uses the internal pull-up (`INPUT_PULLUP`), so pressed = connected to GND.
+- If your LCD uses address `0x3F` instead of `0x27`, change it in the line `LiquidCrystal_I2C lcd(0x27, 16, 4);`.
+- The load switched by the relay (e.g. a 230 V soldering iron) goes on the module's **COM/NO** contacts: work with the mains disconnected and insulate the contacts well.
+- Power: a stable 5 V supply; consumption rises when the relay is on, so use a supply rated at least 1 A.
 
-## Contenuto del repository
+## Repository contents
 
-| Percorso | Descrizione |
+| Path | Description |
 |---|---|
-| `Contatore_alla_Rovescia_per_Saldatore/Contatore_alla_Rovescia_per_Saldatore.ino` | Sketch Arduino |
-| `immagini/` | Foto e immagini dell'articolo |
+| `Soldering_Countdown_Timer/Soldering_Countdown_Timer.ino` | Arduino sketch |
+| `images/` | Photos and images |
 
-## Come si usa
+## How to use it
 
-1. Apri [`Contatore_alla_Rovescia_per_Saldatore.ino`](Contatore_alla_Rovescia_per_Saldatore) con Arduino IDE e carica su Arduino UNO o Nano.
-2. Collegamenti: LCD I2C su A4/A5, START D8, STOP D9, relè D10, buzzer D11, LED D12.
+1. Open [`Soldering_Countdown_Timer.ino`](Soldering_Countdown_Timer) in the Arduino IDE and upload it to an Arduino UNO or Nano.
+2. Connections: I2C LCD on A4/A5, START D8, STOP D9, relay D10, buzzer D11, LED D12.
 
-Schema dei collegamenti, dettagli e risoluzione dei problemi: **[articolo su www.emgi.it](https://www.emgi.it/2026/04/03/contatore-alla-rovescia-arduino-con-lcd-16x4-rele-e-buzzer/)**.
+Wiring diagram, details and troubleshooting: **[article on www.emgi.it](https://www.emgi.it/2026/04/03/contatore-alla-rovescia-arduino-con-lcd-16x4-rele-e-buzzer/)** (in Italian).
 
-## Licenza
+## License
 
-- Codice e configurazioni: [MIT](LICENSE)
-- Modelli 3D, schemi e immagini: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.it)
+- Code and configuration: [MIT](LICENSE)
+- 3D models, diagrams and images: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 ---
 
-**Autore:** Massimiliano Sandrin – **[eMGi.it](https://www.emgi.it)** · Domande e commenti sotto l'[articolo sul sito](https://www.emgi.it/2026/04/03/contatore-alla-rovescia-arduino-con-lcd-16x4-rele-e-buzzer/).
+**Author:** Massimiliano Sandrin – **[eMGi.it](https://www.emgi.it)** · Questions and comments below the [article on the website](https://www.emgi.it/2026/04/03/contatore-alla-rovescia-arduino-con-lcd-16x4-rele-e-buzzer/).
